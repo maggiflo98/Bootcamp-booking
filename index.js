@@ -3,6 +3,8 @@ const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const colors = require("colors");
+const errorHandler = require("./middlwares/error");
+//const errorResponse = require("./utils/errorResponse");
 
 //load env;
 // dotenv.config = { path: "../config/config.env"}
@@ -26,6 +28,9 @@ app.use(bodyParser.json());
 //middleware
 app.use("/api/v1/bootcamps", bootcampsRoute);
 
+//error handler middleware
+app.use(errorHandler);
+//app.use(errorResponse);
 //dev logging middleware
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
