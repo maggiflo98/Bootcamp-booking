@@ -1,4 +1,4 @@
-const ErorResponse = require("../utils/errorResponse");
+const ErrorResponse = require("../utils/errorResponse");
 const asyncHandler = require("../middlwares/async");
 const Bootcamp = require("../models/Bootcamp");
 
@@ -19,14 +19,14 @@ exports.getBootcamps = asyncHandler(async (req, res, next) => {
 //@desc: get one bootcamp
 //@method get/api/v1/bootcamps/:id
 //@access:dont have to log in
+
 exports.getBootcamp = asyncHandler(async (req, res, next) => {
   const bootcamp = await Bootcamp.findById(req.params.id);
 
   if (!bootcamp) {
     //return res.status(400).json({ msg: "no bootcamp found" });
 
-    return;
-    next(
+    return next(
       new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404)
     );
   }
@@ -46,6 +46,7 @@ exports.getBootcamp = asyncHandler(async (req, res, next) => {
 //@desc :update bootcamp
 //method: put/api/bootcamps/:id
 //access:private
+
 exports.updateBootcamp = asyncHandler(async (req, res, next) => {
   const bootcamp = await Bootcamp.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
@@ -75,6 +76,7 @@ exports.deleteBootcamp = asyncHandler(async (req, res, next) => {
 //@des create  new bootcamp
 //rouute post/api/v1/bootcamps
 //access private
+
 exports.createBootcamp = asyncHandler(async (req, res, next) => {
   const bootcamp = await Bootcamp.create(req.body);
 

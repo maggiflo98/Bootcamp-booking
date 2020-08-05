@@ -30,7 +30,7 @@ app.use("/api/v1/bootcamps", bootcampsRoute);
 
 //error handler middleware
 app.use(errorHandler);
-//app.use(errorResponse);
+
 //dev logging middleware
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
